@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+{% load static %}
+    <link rel="shortcut icon" href="#">
+    <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MERGE</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="{% static 'merge/css/merge.css' %}">
+    
+</head>
+
+<body >
+    <nav class="navbar navbar-dark bg-dark" style="background-color: #5183a8;height: 8vh;">
+      <a class="navbar-brand" href="#">
+        <img src="http://127.0.0.1:8000/static/merge/css/logo.png" alt="" width="250" height="50">
+      </a>
+    </nav>
+    <div class="sidenav" style="float:left;width: 22%;height: 92vh;" > 
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12 text-center">
+              <h3 class="animate-charcter"> PDF Converter</h3>
+            </div>
+          </div>
+        </div>
+        <button onclick='getfilemodal(this.id)' id='Docx'  value='docx' class="dropdown-btn" style="text-align: center;margin-top: 4vh;padding-top: 4vh;">Docx To PDF</button>
+        <button onclick='getfilemodal(this.id)' id='Image'value='jpeg,jpg,png,gif,tiff,psd' class="dropdown-btn" style="text-align: center;padding-top: 4vh;">Image To PDF</button>
+        <button onclick='getfilemodal(this.id)' id='Text'  value='odt,rtf,tex,txt,wpd' class="dropdown-btn" style="text-align: center;padding-top: 4vh;">Text To PDF</button>
+        <button onclick='getfilemodal(this.id)' id='Doc'   value='doc' class="dropdown-btn" style="text-align: center;padding-top: 4vh;">Doc To PDF</button>
+        <button onclick='getfilemodal(this.id)' id='Multiple'   value='Any Files' class="dropdown-btn" style="text-align: center;padding-top: 4vh;">Multiple File To PDF</button>        
+    </div>  
+    <div id="home_message" style="float: right; width: 76vw; height: 92vh; padding: 25vh; display: block;padding-top: 17vh;">
+      <h1 style="font-size: 8vh;color: black;">Welcome to Our Convert Api</h1>
+      <p>
+        <h3>We Gurantee Format Allignment. <br> Our Api Supports all File formats</h3>
+        
+      </p>      
+    </div>
+    <div id="rightside" style="float: right; display: block; width: 78%;background-color: floralwhite;">
+      <table id ="main_message" style="">
+        <tbody>
+          <tr style="height: 58%;">
+            <th>
+              <div class="select_file" style="float:right;width: 75vw;height: 45vh;padding: 10vh;">
+                <h2 id="format_category" style="font-family:Times New Roman, Times, serif;border-bottom: 4px solid;width: max-content;border-radius: 7px;color: darkblue;"></h2>
+                <p id='format_message'></p>              
+                <div class="file-drop-area" style="width: 100%;height: 100%;">
+                  <span style="text-align:center;height: 100%;width: 100%;padding-top: 5vh;">
+                    
+                    <img src="http://127.0.0.1:8000/static/merge/css/merge.png" width="70" alt="not found image">
+                    <p id="file_initial_message">Drag & Drop to Upload Files <br> Or <br> Click Here </p> 
+                    <p id="file_upload_message"></p>  
+          
+                  </span>          
+                  <input class="file-input" id='files' onchange="countfile(this)" type="file" multiple>
+                </div>           
+              </div> 
+            </th>
+          </tr>
+          <tr style="height:25vh;">          
+            <th style="padding-left: 10vh;padding-right: 3.4vw;">
+              <div style="">
+                
+                <div>
+                  <div style="float:left;width:48%;">
+                    <p id="status" style="font-size: 1.4vw;"></p>
+  
+                  </div>
+                  <div style="float:right;width:52%;">
+                    <p id="percentage" style="font-size: 36px;border-top: double;border-bottom: double;width: max-content;"></p>
+                
+                  </div>
+                  </div>          
+                <div class="progress" style="width: 100%;height: 3px;">            
+                  <div class="progress-bar" id="progress_bar" style="background-image: linear-gradient(to left, indigo, blue, green, yellow, orange, red);" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+              </div>            
+            </th>
+          </tr>
+          <tr>
+            <th style="padding-left: 45%;padding-bottom: 3vh;">
+              <form method="get" action="http://127.0.0.1:8000/static/result/result.pdf">
+                <button type="submit" id="final_button" style="width: 20%;border-radius: 31px;"  disabled class="btn btn-success">Download PDF</button>
+             </form>
+             
+              {% comment %} <button type="submit" style="width: 20%;" class="btn btn-success">Download PDF</button> {% endcomment %}
+            </th>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div id="myModal" class="modal" style="display:none;">
+
+      <!-- Modal content -->
+      <div class="modal-content" style="width: 20%;color: red;text-align: center;">
+          <p>Error :</p>       
+        <p id="format_error_message" style="padding-top: 2vh;"></p>
+      </div>
+    
+    </div>
+    
+    
+</body>
+{% block js %}
+<script src="{%static 'merge/js/merge.js'%}"></script>
+{% endblock js %}
+</html>
